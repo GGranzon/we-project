@@ -1,0 +1,13 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.96.236.176:3306/db_wedb?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 12345678
+#    开启sql语句日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
