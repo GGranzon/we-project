@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -25,6 +26,7 @@ import lombok.experimental.Accessors;
  * @since 2020-12-20
  */
 @Data
+@ToString
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_member")
@@ -96,7 +98,7 @@ public class Member implements Serializable {
         @ApiModelProperty(value = "修改人")
         private String modifyBy;
 
-        @ApiModelProperty(value = "修改人")
+        @ApiModelProperty(value = "修改时间")
         private Date modifyTime;
 
     @Version
@@ -106,10 +108,10 @@ public class Member implements Serializable {
     private Integer deleted;
 
     @TableField(fill = FieldFill.INSERT)
-    private String gmtCreate;
+    private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String gmtModified;
+    private Date gmtModified;
 
 
 }
