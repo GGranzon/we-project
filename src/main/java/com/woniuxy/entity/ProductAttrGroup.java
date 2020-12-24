@@ -22,6 +22,7 @@ import lombok.experimental.Accessors;
  * @author liuHongTao
  * @since 2020-12-20
  */
+//产品属性组
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
@@ -55,6 +56,4 @@ public class ProductAttrGroup implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String gmtModified;
-
-
 }

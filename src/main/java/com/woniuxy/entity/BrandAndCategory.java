@@ -22,6 +22,7 @@ import lombok.experimental.Accessors;
  * @author liuHongTao
  * @since 2020-12-20
  */
+//品牌和类别
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)

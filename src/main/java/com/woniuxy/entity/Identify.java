@@ -23,6 +23,7 @@ import lombok.experimental.Accessors;
  * @author liuHongTao
  * @since 2020-12-20
  */
+//鉴定表
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
