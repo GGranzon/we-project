@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
  * @author liuHongTao
  * @since 2020-12-20
  */
-@Service("userService")
+
 public interface UserService extends IService<User> {
 
+    //注册
+    int register(User user);
+    //修改
+    int update(User user);
 }

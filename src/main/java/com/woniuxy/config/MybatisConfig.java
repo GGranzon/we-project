@@ -26,6 +26,8 @@ public class MybatisConfig {
 
     //逻辑删除
 
+
+    //分页查询
     @Bean
     public PaginationInterceptor paginationInterceptor(){
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
