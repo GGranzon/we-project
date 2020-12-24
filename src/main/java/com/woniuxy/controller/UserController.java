@@ -4,12 +4,17 @@ package com.woniuxy.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.woniuxy.dto.Result;
 import com.woniuxy.dto.StatusCode;
+import com.woniuxy.entity.Permission;
 import com.woniuxy.entity.User;
 import com.woniuxy.jwt.JwtUtil;
 import com.woniuxy.mapper.UserMapper;
 import com.woniuxy.service.UserService;
 import com.woniuxy.utils.SaltUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -68,9 +75,10 @@ public class UserController {
 //
 //        return new Result(false,StatusCode.FAILED,"用户名已存在，注册失败");
 //    }
-
+    //登录
     @RequestMapping("/login")
     public Result login(String username, String password, HttpServletRequest request){
+        System.out.println(username+password);
         User user = userMapper.selectOne(new QueryWrapper<User>().eq("username", username));
         if(!ObjectUtils.isEmpty(user)){
             String salt = user.getSalt();
@@ -86,8 +94,42 @@ public class UserController {
         return new Result(false,StatusCode.FAILED,"当前用户尚未注册");
     }
 
+    //根据角色的不同获取不同的菜单
+    @RequestMapping("menu")
+    @RequiresRoles(value = {"boss","admin","worker"}, logical = Logical.OR)
+    public Result getMenu(){
+        String username = JwtUtil.getUsername(SecurityUtils.getSubject().getPrincipal().toString());
+        User user = userMapper.selectOne(new QueryWrapper<User>().eq("username", username));
+        List<Permission> permissions = userMapper.queryPermissionsByUserId(user.getId());
+        if(!CollectionUtils.isEmpty(permissions)){
+            //装所有父级菜单的容器
+            ArrayList<Permission> parents = new ArrayList<>();
+            permissions.forEach(permission -> {
+                if(permission.getLevel() == 1){
+                    permission.setChildren(new ArrayList<>());
+                    permissions.forEach(permission1 -> {
+                        //找到该父级菜单下的所有子级菜单
+                        if(permission.getId().equals(permission1.getParentId())){
+                            permission.getChildren().add(permission1);
+                        }
+                    });
+
+                    parents.add(permission);
+                }
+            });
+            if(!CollectionUtils.isEmpty(parents)){
+                return new Result(true,StatusCode.OK,"查询用户权限名成功",parents);
+            }
+            return new Result(false,StatusCode.FAILED,"查询用户权限名失败");
+        }
+        return new Result(false,StatusCode.FAILED,"查询用户权限名失败");
+    }
+
+
+
     @RequestMapping("/update")
     public Result update(){
+        System.out.println("进入了修改");
         return new Result(true,StatusCode.OK,"修改成功");
     }
 

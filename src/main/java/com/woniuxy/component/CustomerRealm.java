@@ -43,6 +43,7 @@ public class CustomerRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         String username  = JwtUtil.getUsername(principals.toString());
+        System.out.println(username);
         //从令牌中获取用户名，查询该用户拥有的角色
         List<Role> roles = userMapper.getRoles(username);
         //创建容器装用户所拥有的 角色 和 权限
@@ -65,7 +66,6 @@ public class CustomerRealm extends AuthorizingRealm {
                     });
                 }
             });
-
             //为当前用户指定角色
             simpleAuthorizationInfo.addRoles(roleNames);
             //为当前用户指定权限
@@ -83,6 +83,11 @@ public class CustomerRealm extends AuthorizingRealm {
         String token = (String) authenticationToken.getCredentials();
         //解密获得username,用于和数据库进行对比
         String username = JwtUtil.getUsername(token);
+        //先判断自动生成的token 是否已经过期，如果已经过期，去redis里判断是否过期
+        if(!JwtUtil.verify(token,username)){
+
+        }
+
         //如果未能通过解密得到username 或 token校验未通过
         if(username == null || !JwtUtil.verify(token,username)){
             throw new AuthenticationException("token认证失败！");
