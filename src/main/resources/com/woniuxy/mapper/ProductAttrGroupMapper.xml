@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.mapper.ProductAttrGroupMapper">
+    <resultMap id="attrGroupMap" type="ProductAttrGroup">
+        <id column="id" property="id" />
+        <result column="group_name" property="groupName" />
+        <result column="sort" property="sort" />
+        <result column="status" property="status" />
+        <result column="count" property="countConf" />
+        <association property="groupAndCategory" javaType="GroupAndCategory" >
+            <id column="id" property="id" />
+            <association property="productCategory" javaType="ProductCategory">
+                <id column="id" property="id" />
+                <result column="category_name" property="categoryName" />
+            </association>
+        </association>
+    </resultMap>
+    <select id="findAttrGroup" resultMap="attrGroupMap">
+        SELECT pag.id,pag.group_name,pag.sort,pag.status,gac.id,pc.id,
+        pc.category_name,(SELECT COUNT(id) FROM t_product_attr_conf WHERE group_id = pag.id) as count
+        FROM t_product_attr_group as pag
+        JOIN t_group_and_category as gac ON pag.id = gac.group_id
+        JOIN t_product_category as pc ON gac.category_id = pc.id where pag.deleted = 0
+    </select>
+    <resultMap id="fuzzyAttrGroupMap" type="ProductAttrGroup">
+        <id column="id" property="id" />
+        <result column="group_name" property="groupName" />
+        <result column="sort" property="sort" />
+        <result column="status" property="status" />
+        <result column="count" property="countConf" />
+        <association property="groupAndCategory" javaType="GroupAndCategory" >
+            <id column="id" property="id" />
+            <association property="productCategory" javaType="ProductCategory">
+                <id column="id" property="id" />
+                <result column="category_name" property="categoryName" />
+            </association>
+        </association>
+    </resultMap>
+    <select id="fuzzyAttrGroup" resultMap="fuzzyAttrGroupMap">
+        SELECT pag.id,pag.group_name,pag.sort,pag.status,gac.id,pc.id,
+        pc.category_name,(SELECT COUNT(id) FROM t_product_attr_conf WHERE group_id = pag.id) as count
+        FROM t_product_attr_group as pag
+        JOIN t_group_and_category as gac ON pag.id = gac.group_id
+        JOIN t_product_category as pc ON gac.category_id = pc.id ${ew.customSqlSegment}
+    </select>
+</mapper>

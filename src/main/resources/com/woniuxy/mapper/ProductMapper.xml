@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.mapper.ProductMapper">
+    <resultMap id="productMap" type="Product">
+        <id column="product_id" property="productId" />
+        <result column="product_name" property="productName" />
+        <result column="input_user" property="inputUser" />
+        <result column="surveyor" property="surveyor" />
+        <result column="assessor" property="assessor" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="product_status" property="productStatus" />
+        <association property="firstProductCategory" javaType="ProductCategory">
+            <id column="id" property="id" />
+            <result column="parent_category" property="categoryName" />
+        </association>
+        <association property="secondProductCategory" javaType="ProductCategory">
+            <id column="id" property="id" />
+            <result column="category_name" property="categoryName" />
+        </association>
+        <association property="inUser" javaType="User">
+            <id column="id" property="id" />
+            <result column="inputName" property="username" />
+        </association>
+        <association property="suUser" javaType="User">
+            <id column="id" property="id" />
+            <result column="surveyorName" property="username" />
+        </association>
+        <association property="asUser" javaType="User">
+            <id column="id" property="id" />
+            <result column="assessorName" property="username" />
+        </association>
+    </resultMap>
+    <select id="queryProductInfo" resultMap="productMap">
+            SELECT p.product_id,p.product_name,p.second_cat_id,p.third_cat_id,p.input_user,p.surveyor,p.assessor,
+            p.gmt_create,p.product_status,pc.id,pc.category_name as parent_category,pcp.id,pcp.category_name,
+            iu.username as inputName,su.username as surveyorName,au.username as assessorName
+            FROM t_product as p
+            JOIN t_product_category as pc ON p.second_cat_id = pc.id
+            JOIN t_product_category as pcp ON p.third_cat_id = pcp.id
+            JOIN t_user as iu ON p.input_user = iu.id
+            JOIN t_user as au ON p.assessor = au.id
+            JOIN t_user as su ON p.surveyor = su.id
+    </select>
+</mapper>

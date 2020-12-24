@@ -1,7 +1,6 @@
 package com.woniuxy.config;
 
-import com.baomidou.mybatisplus.core.injector.ISqlInjector;
-import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
+
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -26,11 +25,7 @@ public class MybatisConfig {
     }
 
     //逻辑删除
-    @Bean
-    public ISqlInjector sqlInjector(){
-        return new LogicSqlInjector();
-    }
-    //分页查询
+
     @Bean
     public PaginationInterceptor paginationInterceptor(){
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Component
-@RestControllerAdvice
+//@RestControllerAdvice
 public class GlobalException {
 
     @ExceptionHandler({NullPointerException.class})

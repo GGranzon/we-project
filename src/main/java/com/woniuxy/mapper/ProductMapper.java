@@ -1,5 +1,7 @@
 package com.woniuxy.mapper;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.woniuxy.entity.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ProductMapper extends BaseMapper<Product> {
 
+    IPage<Product> queryProductInfo(Page<Product> page);
 }

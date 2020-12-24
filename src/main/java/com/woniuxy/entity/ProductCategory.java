@@ -74,5 +74,6 @@ public class ProductCategory implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String gmtModified;
 
-
+    @TableField(exist = false)
+    private ProductCategory productCategoryParent;
 }
