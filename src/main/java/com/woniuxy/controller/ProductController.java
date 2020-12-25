@@ -48,7 +48,7 @@ public class ProductController {
     private ProductCategoryMapper productCategoryMapper;
 
     @Resource
-    private BrandInfoMapper brandInfoMapper ;
+    private BrandinfoMapper brandInfoMapper ;
 
     @Resource
     private ShopMapper shopMapper ;
@@ -123,7 +123,7 @@ public class ProductController {
         bwrapper.eq("category_id",productCategory.getCategoryParent());
         List<BrandAndCategory> brandAndCategorys = brandAndCategoryMapper.selectList(bwrapper);
         System.out.println("获取中间类"+brandAndCategorys);
-        List<BrandInfo> brandInfos = new ArrayList<>();
+        List<Brandinfo> brandInfos = new ArrayList<>();
         for (BrandAndCategory brandAndCategory:brandAndCategorys) {
             brandInfos.add(brandInfoMapper.selectById(brandAndCategory.getBrandId()));
         }

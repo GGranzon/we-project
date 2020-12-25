@@ -125,13 +125,14 @@ public class MemberController {
     }
     //根据状态查询会员信息
 //    @GetMapping("status")
-//    public Result findByStatus(StatusVo statusVo){
+//    public Result findByStatus(StatusVo statusVo) {
 //        String sat = statusVo.getSta();
-//        if (sat.equals("全部")){
+//        if (sat.equals("全部")) {
 //            Page<Member> memberPage = new Page<>(statusVo.getCurrent(), statusVo.getSize());
 //            IPage<Member> page = memberService.page(memberPage, null);
-//            return new Result(true,StatusCode.OK,"获取成功",page);
-//        }else{
-
+//            return new Result(true, StatusCode.OK, "获取成功", page);
+//        } else {
+//            return null;
+//        }
+//    }
 }
-
