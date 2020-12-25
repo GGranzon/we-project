@@ -1,10 +1,12 @@
-package com.woniuxy.redis;
+package com.woniuxy.component;
 
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 public class RedisClient {
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
+
+//    private StringRedisTemplate stringRedisTemplate;
 
     public void setRedisTemplate(RedisTemplate<String,Object> redisTemplate){
         this.redisTemplate = redisTemplate;
@@ -384,9 +388,14 @@ public class RedisClient {
      * @param end   结束 0 到 -1代表所有值
      * @return
      */
-    public List<Object> lGet(String key, long start, long end) {
+    public List<String> lGet(String key, long start, long end) {
         try {
-            return redisTemplate.opsForList().range(key, start, end);
+            ArrayList<String> strings = new ArrayList<>();
+            List<Object> range = redisTemplate.opsForList().range(key, start, end);
+            range.forEach(p->{
+                strings.add(p.toString());
+            });
+            return strings;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

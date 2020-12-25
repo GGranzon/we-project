@@ -68,7 +68,7 @@ public class ShiroConfig {
         //只有登录界面允许匿名访问
         linkedHashMap.put("/login","anon");
         //所有请求由 自定义的jwt Filter过滤
-//        linkedHashMap.put("/**","jwt");
+        linkedHashMap.put("/**","jwt");
 
         filterFactoryBean.setFilterChainDefinitionMap(linkedHashMap);
         return filterFactoryBean;

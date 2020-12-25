@@ -2,7 +2,7 @@ package com.woniuxy.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.woniuxy.redis.RedisClient;
+import com.woniuxy.component.RedisClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;

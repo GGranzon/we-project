@@ -59,6 +59,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.58</version>
         </dependency>
+<!--   用于redis配置类     -->
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+        </dependency>
 
         <!-- mybatis-plus 是个人开发者发布的，并非官方发布！ -->
         <dependency>
