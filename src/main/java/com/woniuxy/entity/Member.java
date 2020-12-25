@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -26,6 +27,7 @@ import lombok.experimental.Accessors;
  */
 //会员
 @Data
+@ToString
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_member")
@@ -36,7 +38,7 @@ public class Member implements Serializable {
 
         @ApiModelProperty(value = "会员编号")
         @TableId(value = "member_id", type = IdType.ID_WORKER)
-    private String memberId;
+        private String memberId;
 
         @ApiModelProperty(value = "会员姓名")
         private String name;
@@ -50,7 +52,7 @@ public class Member implements Serializable {
         @ApiModelProperty(value = "账户名称")
         private String accountName;
 
-    private String openingBank;
+        private String openingBank;
 
         @ApiModelProperty(value = "账号")
         private String accountNum;
@@ -97,7 +99,7 @@ public class Member implements Serializable {
         @ApiModelProperty(value = "修改人")
         private String modifyBy;
 
-        @ApiModelProperty(value = "修改人")
+        @ApiModelProperty(value = "修改时间")
         private Date modifyTime;
 
     @Version
@@ -107,10 +109,10 @@ public class Member implements Serializable {
     private Integer deleted;
 
     @TableField(fill = FieldFill.INSERT)
-    private String gmtCreate;
+    private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String gmtModified;
+    private Date gmtModified;
 
 
 }

@@ -1,19 +1,19 @@
 package com.woniuxy.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import com.woniuxy.entity.Member;
 import com.woniuxy.mapper.MemberMapper;
 import com.woniuxy.service.MemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.woniuxy.vo.PageVo;
+import com.woniuxy.vo.MemberVo;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.UUID;
+import java.util.ArrayList;
+
 
 /**
  * <p>
@@ -34,13 +34,22 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     public int addMember(Member member) {
 //        System.out.println("进入了service");
         int i = memberMapper.insert(member);
+
         return i;
     }
 
 
-    //分页查询
+    //根据id修改会员信息
+    public int updateMember(Member member){
+        int i = memberMapper.updateById(member);
+        return i;
+    }
 
-
+    @Override
+    public int deleteMember(ArrayList<String> ids) {
+        int i = memberMapper.deleteBatchIds(ids);
+        return i;
+    }
 
 
 }
