@@ -29,6 +29,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("t_distributor")
 @ApiModel(value="Distributor对象", description="")
+//经销商
 public class Distributor implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -92,7 +92,7 @@ public class Product implements Serializable {
         private String productDesc;
 
         @ApiModelProperty(value = "录入人")
-        private byte[] inputUser;
+        private String inputUser;
 
         @ApiModelProperty(value = "录入时间")
         private Date inputDate;
@@ -146,10 +146,26 @@ public class Product implements Serializable {
     private Integer deleted;
 
     @TableField(fill = FieldFill.INSERT)
-    private String gmtCreate;
+    private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String gmtModified;
+    private Date gmtModified;
+
+    @TableField(exist = false)
+    private ProductCategory firstProductCategory;
+    @TableField(exist = false)
+    private ProductCategory secondProductCategory;
+    @TableField(exist = false)
+    private User inUser;
+    @TableField(exist = false)
+    private User suUser;
+    @TableField(exist = false)
+    private User asUser;
+    @TableField(exist = false)
+    private String degree;
+    @TableField(exist = false)
+    private String identifyNote;
+
 
 
 }

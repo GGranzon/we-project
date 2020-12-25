@@ -1,6 +1,6 @@
 package com.woniuxy.config;
 
-import com.baomidou.mybatisplus.core.injector.ISqlInjector;
+
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -23,6 +23,8 @@ public class MybatisConfig {
     public OptimisticLockerInterceptor optimisticLockerInterceptor(){
         return new OptimisticLockerInterceptor();
     }
+
+    //逻辑删除
 
 
     //分页查询

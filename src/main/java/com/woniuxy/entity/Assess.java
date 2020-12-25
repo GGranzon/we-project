@@ -29,6 +29,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("t_assess")
 @ApiModel(value="Assess对象", description="")
+//评估
 public class Assess implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,6 +24,7 @@ import lombok.experimental.Accessors;
  * @author liuHongTao
  * @since 2020-12-20
  */
+//商品类别
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
@@ -69,10 +72,11 @@ public class ProductCategory implements Serializable {
     private Integer deleted;
 
     @TableField(fill = FieldFill.INSERT)
-    private String gmtCreate;
+    private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String gmtModified;
+    private Date gmtModified;
 
-
+    @TableField(exist = false)
+    private ProductCategory productCategoryParent;
 }

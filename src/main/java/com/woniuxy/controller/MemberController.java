@@ -133,48 +133,5 @@ public class MemberController {
             return new Result(true,StatusCode.OK,"获取成功",page);
         }else{
 
-            //List<Member> list = memberService.list(wrapper);
-            QueryWrapper<Member> wrapper = new QueryWrapper<>();
-            wrapper.eq("status",sat);
-            Page<Member> memberPage = new Page<>(statusVo.getCurrent(), statusVo.getSize());
-            Page<Member> page = memberService.page(memberPage, wrapper);
-            return new Result(true,StatusCode.OK,"获取成功",page);
-        }
-    }
-    //根据手机号/会员名查询会员信息
-    @GetMapping("condition")
-    public Result findByCondition(StatusVo statusVo){
-        String condition = statusVo.getCondition();
-        System.out.println(condition);
-        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("account_name",condition).or().eq("tel",condition);
-        Page<Member> page = new Page<>(statusVo.getCurrent(), statusVo.getSize());
-        Page<Member> list = memberService.page(page, queryWrapper);
-
-        return new Result(true,StatusCode.OK,"获取成功",list );
-    }
-
-    //根据姓名查询会员是否存在
-    @GetMapping("isEmptyMem")
-    public Result findByName(String name){
-        System.out.println(name);
-        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",name);
-        List<Member> one = memberService.list(queryWrapper);
-        if(one.size()==0){//会员不存在，可以注册
-            return new Result(true,StatusCode.OK,"会员不存在");
-        }else {
-            return new Result(false,StatusCode.ISNOTEMPTY,"会员已存在");
-        }
-    }
-    //查询会员详细信息
-    @GetMapping("memberInfo")
-    public Result info(String id){
-        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("member_id",id);
-        //Member one = memberService.getOne(queryWrapper);
-        List<Member> list = memberService.list(queryWrapper);
-        return new Result(true,StatusCode.OK,"查询成功",list);
-    }
 }
 

@@ -25,6 +25,7 @@ import lombok.experimental.Accessors;
  * @author liuHongTao
  * @since 2020-12-20
  */
+//会员
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
