@@ -1,8 +1,7 @@
 package com.woniuxy.controller;
 
 
-import com.alibaba.druid.sql.dialect.sqlserver.ast.SQLServerOutput;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,16 +12,11 @@ import com.woniuxy.entity.Member;
 import com.woniuxy.mapper.DistributorMapper;
 import com.woniuxy.service.DistributorService;
 import com.woniuxy.service.MemberService;
-import com.woniuxy.service.UserService;
-import com.woniuxy.vo.MemberVo;
 import com.woniuxy.vo.PageVo;
 import com.woniuxy.vo.StatusVo;
-import org.apache.commons.collections.ListUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -133,5 +127,48 @@ public class MemberController {
             return new Result(true,StatusCode.OK,"获取成功",page);
         }else{
 
+            //List<Member> list = memberService.list(wrapper);
+            QueryWrapper<Member> wrapper = new QueryWrapper<>();
+            wrapper.eq("status",sat);
+            Page<Member> memberPage = new Page<>(statusVo.getCurrent(), statusVo.getSize());
+            Page<Member> page = memberService.page(memberPage, wrapper);
+            return new Result(true,StatusCode.OK,"获取成功",page);
+        }
+    }
+    //根据手机号/会员名查询会员信息
+    @GetMapping("condition")
+    public Result findByCondition(StatusVo statusVo){
+        String condition = statusVo.getCondition();
+        System.out.println(condition);
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("account_name",condition).or().eq("tel",condition);
+        Page<Member> page = new Page<>(statusVo.getCurrent(), statusVo.getSize());
+        Page<Member> list = memberService.page(page, queryWrapper);
+
+        return new Result(true,StatusCode.OK,"获取成功",list );
+    }
+
+    //根据姓名查询会员是否存在
+    @GetMapping("isEmptyMem")
+    public Result findByName(String name){
+        System.out.println(name);
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("name",name);
+        List<Member> one = memberService.list(queryWrapper);
+        if(one.size()==0){//会员不存在，可以注册
+            return new Result(true,StatusCode.OK,"会员不存在");
+        }else {
+            return new Result(false,StatusCode.ISNOTEMPTY,"会员已存在");
+        }
+    }
+    //查询会员详细信息
+    @GetMapping("memberInfo")
+    public Result info(String id){
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("member_id",id);
+        //Member one = memberService.getOne(queryWrapper);
+        List<Member> list = memberService.list(queryWrapper);
+        return new Result(true,StatusCode.OK,"查询成功",list);
+    }
 }
 
