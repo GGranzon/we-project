@@ -92,7 +92,7 @@ public class Product implements Serializable {
         private String productDesc;
 
         @ApiModelProperty(value = "录入人")
-        private byte[] inputUser;
+        private String inputUser;
 
         @ApiModelProperty(value = "录入时间")
         private Date inputDate;
@@ -161,6 +161,10 @@ public class Product implements Serializable {
     private User suUser;
     @TableField(exist = false)
     private User asUser;
+    @TableField(exist = false)
+    private String degree;
+    @TableField(exist = false)
+    private String identifyNote;
 
 
 

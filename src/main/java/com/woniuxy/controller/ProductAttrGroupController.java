@@ -67,7 +67,6 @@ public class ProductAttrGroupController {
     @RequestMapping("deleteAttrGroup")
     public Result alterAttrGroup(@RequestBody String[] groupIds){
         String msg = productAttrGroupService.deleteAttrGroup(groupIds);
-
         return new Result(true,StatusCode.OK,msg);
     }
 

@@ -16,4 +16,6 @@ import com.woniuxy.vo.PageVo;
 public interface ProductService extends IService<Product> {
 
     IPage<Product> queryProductInfo(PageVo pageVo);
+
+    IPage<Product> fuzzyProductInfo(PageVo pageVo,String productName,String productStatus,String username);
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("t_product_img")
-@ApiModel(value="GroupAndCategory对象", description="")
+@ApiModel(value="ProductImg对象", description="")
 public class ProductImg {
 
     @ApiModelProperty(value = "商品图片表id")
@@ -25,6 +25,9 @@ public class ProductImg {
 
     @ApiModelProperty(value = "分类编号")
     private String imgInfo;
+
+    @ApiModelProperty(value = "商品id")
+    private String productId;
 
     @Version
     private Integer version;
