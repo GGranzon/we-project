@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@Component
-@RestControllerAdvice
+//@Component
+//@RestControllerAdvice
 public class GlobalException {
 
     @ExceptionHandler({NullPointerException.class})

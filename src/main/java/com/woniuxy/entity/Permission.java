@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -45,6 +47,9 @@ public class Permission implements Serializable {
 
         @ApiModelProperty(value = "父级菜单id")
         private String parentId;
+
+        @ApiModelProperty(value = "子菜单")
+        private List<Permission> children;
 
     @Version
     private Integer version;
