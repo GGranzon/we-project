@@ -1,10 +1,15 @@
 package com.woniuxy.jwt;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.woniuxy.redis.RedisClient;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class JwtFilter extends BasicHttpAuthenticationFilter {
+
+    @Resource
+    private RedisClient redis;
+
     /**
      * 如果带有 token ，则对 token 进行检查，否则直接通过
      * @param request
@@ -93,4 +102,25 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         }
         return super.preHandle(request, response);
     }
+
+//    protected boolean refreshToken(ServletRequest request,ServletResponse response){
+//        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+//        //拿到当前Header中的token
+//        String token = httpServletRequest.getHeader("Token");
+//        //获取当前Token的用户信息
+//        String username = JwtUtil.getUsername(token);
+//        //判断Redis中RefreshToken是否存在
+//        if(redis.hasKey(username)){
+//            //Redis中RefreshToken还存在，获取其时间戳
+//            String currentTimeMillisRedis = redis.get(username).toString();
+//            //获取当前token的时间戳，与RefreshToken的时间戳对比，如果当前时间戳一致，刷新token
+//            String currentTimeMillis = JWT.decode(token).getClaim("currentTimeMillis").toString();
+//            if(currentTimeMillis.equals(currentTimeMillisRedis)){
+//                //获取当前最新时间戳
+//                String currentTimeMillis1 = String.valueOf(System.currentTimeMillis());
+//                //设置RefreshToken中的时间戳为当前最新时间戳
+//                redis.set(username,currentTimeMillis1);
+//            }
+//        }
+//    }
 }

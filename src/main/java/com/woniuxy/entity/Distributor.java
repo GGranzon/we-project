@@ -29,13 +29,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("t_distributor")
 @ApiModel(value="Distributor对象", description="")
+//经销商
 public class Distributor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
         @ApiModelProperty(value = "渠道商id")
         @TableId(value = "id", type = IdType.ID_WORKER)
-    private String id;
+        private String id;
 
         @ApiModelProperty(value = "渠道名")
         private String name;
@@ -65,7 +66,7 @@ public class Distributor implements Serializable {
         private BigDecimal allPay;
 
         @ApiModelProperty(value = "状态")
-        private Integer status;
+        private String status;
 
         @ApiModelProperty(value = "创建人")
         private String createBy;
@@ -86,10 +87,10 @@ public class Distributor implements Serializable {
     private Integer deleted;
 
     @TableField(fill = FieldFill.INSERT)
-    private String gmtCreate;
+    private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String gmtModified;
+    private Date gmtModified;
 
 
 }

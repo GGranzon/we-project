@@ -2,6 +2,7 @@ package com.woniuxy.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
@@ -20,24 +21,35 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author liuHongTao
- * @since 2020-12-20
+ * @since 2020-12-24
  */
-//角色表
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_role")
-@ApiModel(value="Role对象", description="")
-public class Role implements Serializable {
+@TableName("t_brandinfo")
+@ApiModel(value="Brandinfo对象", description="")
+public class Brandinfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-        @ApiModelProperty(value = "角色id")
+        @ApiModelProperty(value = "品牌编号")
         @TableId(value = "id", type = IdType.ID_WORKER)
     private String id;
 
-        @ApiModelProperty(value = "角色名")
-        private String rolename;
+        @ApiModelProperty(value = "品牌名称")
+        private String brandName;
+
+        @ApiModelProperty(value = "品牌首字母")
+        private String brandInitial;
+
+        @ApiModelProperty(value = "品牌简介")
+        private String brandInfo;
+
+        @ApiModelProperty(value = "是否展示")
+        private String isShow;
+
+        @ApiModelProperty(value = "排序")
+        private String sort;
 
     @Version
     private Integer version;
@@ -46,10 +58,10 @@ public class Role implements Serializable {
     private Integer deleted;
 
     @TableField(fill = FieldFill.INSERT)
-    private String gmtCreate;
+    private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String gmtModified;
+    private Date gmtModified;
 
 
 }

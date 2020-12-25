@@ -53,6 +53,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
+<!--    fastjson 用于 redis序列化    -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
 
         <!-- mybatis-plus 是个人开发者发布的，并非官方发布！ -->
         <dependency>

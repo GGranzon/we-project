@@ -25,6 +25,7 @@ import lombok.experimental.Accessors;
  * @author liuHongTao
  * @since 2020-12-20
  */
+//会员
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
@@ -37,7 +38,7 @@ public class Member implements Serializable {
 
         @ApiModelProperty(value = "会员编号")
         @TableId(value = "member_id", type = IdType.ID_WORKER)
-    private String memberId;
+        private String memberId;
 
         @ApiModelProperty(value = "会员姓名")
         private String name;
@@ -51,7 +52,7 @@ public class Member implements Serializable {
         @ApiModelProperty(value = "账户名称")
         private String accountName;
 
-    private String openingBank;
+        private String openingBank;
 
         @ApiModelProperty(value = "账号")
         private String accountNum;

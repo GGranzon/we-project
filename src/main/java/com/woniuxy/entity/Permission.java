@@ -64,4 +64,7 @@ public class Permission implements Serializable {
     private String gmtModified;
 
 
+    @ApiModelProperty(value = "一级菜单图标")
+    private String icon;
+
 }
