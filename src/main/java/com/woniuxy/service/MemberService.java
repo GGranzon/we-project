@@ -4,6 +4,7 @@ import com.woniuxy.entity.Member;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.woniuxy.vo.PageVo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ import java.util.List;
 public interface MemberService extends IService<Member> {
 
     int addMember(Member member);
-
+    int updateMember(Member member);
+    int deleteMember(ArrayList<String> ids);
 
 }
