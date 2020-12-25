@@ -4,7 +4,7 @@ package com.woniuxy.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.woniuxy.dto.Result;
 import com.woniuxy.dto.StatusCode;
-import com.woniuxy.entity.ProductAttrConf;
+//import com.woniuxy.entity.ProductAttrConf;
 import com.woniuxy.entity.ProductAttrGroup;
 import com.woniuxy.entity.ProductCategory;
 import com.woniuxy.mapper.ProductAttrGroupMapper;
