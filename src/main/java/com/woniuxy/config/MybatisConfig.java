@@ -24,8 +24,6 @@ public class MybatisConfig {
         return new OptimisticLockerInterceptor();
     }
 
-    //逻辑删除
-
 
     //分页查询
     @Bean
