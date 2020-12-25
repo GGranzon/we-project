@@ -16,6 +16,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +26,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
 
@@ -125,13 +127,17 @@ public class UserController {
         return new Result(false,StatusCode.FAILED,"查询用户权限名失败");
     }
 
+    /**
+     * 登出，清除Token
+     * @return
+     */
+//    @RequestMapping("/logout")
+//    public Result logout(HttpServletRequest request){
+//
+//    }
 
 
-    @RequestMapping("/update")
-    public Result update(){
-        System.out.println("进入了修改");
-        return new Result(true,StatusCode.OK,"修改成功");
-    }
+
 
 }
 

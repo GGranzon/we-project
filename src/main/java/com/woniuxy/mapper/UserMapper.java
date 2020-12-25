@@ -45,7 +45,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     //根据用户id查询其拥有的权限名（登录后能看到的菜单）
     @Select("SELECT DISTINCT\n" +
-            "\tp.id,p.`level`,p.parent_id,p.permission_name\n" +
+            "\tp.id,p.`level`,p.parent_id,p.permission_name,p.url,p.icon\n" +
             "FROM\n" +
             "\tt_user u\n" +
             "LEFT JOIN\n" +
